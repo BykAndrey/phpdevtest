@@ -25,7 +25,7 @@ $(document).ready(function(){
             }
         });
 
-
+        $(this).children('textarea').eq(0).val('');
 
       });
 
@@ -86,11 +86,13 @@ function loadList(page=1){
          
 
 
-            data['list'].forEach(element => {
-                $('div#list')
-                .append("<p>"+element.ID+"-"+element.TEXT+" <b onclick='DropMessage("+element.ID+")'>Удалить</b></p>");
-            });
-
+            console.log(data);
+            if(data['list']!=null ){
+                console.log(2);
+                for(var i=0;i<=data['list'].length-1;i++){
+                    $('div#list').append("<p>"+data['list'][i]['ID']+"-"+data['list'][i]['TEXT']+" <b onclick='DropMessage("+data['list'][i]['ID']+")'>Удалить</b></p>");
+                }
+        }
 
             
             
