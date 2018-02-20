@@ -32,9 +32,15 @@ if(isset($_REQUEST['ajax'])){
             $page=intval($_REQUEST['page']);
         }
         $page--;
+        if($page<0){
+            $page=0;
+        }
         $size=5;
         $max_page=ceil(SQLCountRow("sms_list_tz")/$size);
-        echo json_encode(['list'=>SQLSelect("sms_list_tz",$size*$page,$size),'max_page'=>$max_page]);
+        $list=SQLSelect("sms_list_tz",$size*$page,$size);
+        
+        echo json_encode(['max_page'=>$max_page,'list'=>$list]);
+      //  echo json_encode(['max_page'=>$max_page]);
         exit;
     }
     if( $_REQUEST['ajax']=="dropMessage"){
